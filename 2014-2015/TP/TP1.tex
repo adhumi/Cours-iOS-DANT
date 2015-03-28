@@ -1,0 +1,77 @@
+\documentclass[12pt]{article}
+
+\include{preamble}
+
+\newtoggle{spacingmode}
+%\toggletrue{spacingmode}  %STUDENTS: DELETE or COMMENT this line
+
+\newtoggle{professormode}
+%\toggletrue{professormode} %STUDENTS: DELETE or COMMENT this line
+
+\newcommand{\spc}[1]{\iftoggle{spacingmode}{\\ \vspace{#1cm}}}
+
+
+
+
+\begin{document}
+\homework{LI385 - Introduction au développement iOS}{TP 1 - Découverte d'Objective C et d'Xcode}{Adrien Humiliere}{11/03/2015}
+
+\noindent
+
+\textit{A la fin de ce TP :
+\begin{itemize}
+\item Faire une archive contenant les projets Xcode des exercices.
+\item Envoyer l'archive à \underline{adrien.humiliere@djit.fr}.
+\item Le rendu ne sera pas noté mais fera l'objet d'une correction.
+\item Si le TP est fait à plusieurs, préciser les noms et adresses mail de chacun.
+\end{itemize}}
+
+\problem{Liste chainée} L'objectif de l'exercice est d'implémenter simplement une liste chainée, uniquement avec les types de base d'Objective-C.
+
+\begin{enumerate}
+
+\subproblem Lancer Xcode et créer un nouveau projet de type Command Line Tool (OSX > Application > Command Line Tool).
+
+\subproblem Créer une classe \texttt{Node}, avec deux attributs :
+\begin{itemize}
+\item \texttt{key}, un entier non modifiable
+\item \texttt{next}, une référence vers un objet de type Node
+\end{itemize}
+Implémenter à minima la méthode \texttt{-description} qui, à la façon de la méthode \texttt{toString()} de Java, permet d'afficher l'état courant d'un objet dans le terminal.
+
+\subproblem Créer une classe List, qui implémente une liste simplement chainée. Cette classe devra implémenter la méthode \texttt{-description} et répondre aux méthodes suivantes :
+
+\begin{minted}{objc}
+- (BOOL)isEmpty;
+- (void)addFirst:(Node *)node; 
+- (Node *)removeFirst; 
+- (void)addLast:(Node *)node; 
+- (Node *)removeLast;
+- (Node *)nodeForKey:(int)key;
+\end{minted}
+
+\subproblem Tester le programme en utilisant dans la fonction main() chacune des méthodes implémentées pour la classe List, avec au moins 10 instances de Node dans la liste chainée.
+
+\end{enumerate}
+
+
+\problem{Première UI} L'objectif de cet exercice est d'avoir un premier contact avec les classes de Cocoa Touch et avec les outils de création d'UI fournis par Xcode.
+
+\begin{enumerate}
+
+\subproblem Créer un nouveau projet d'application iOS (iOS > Application > Single View Application).
+
+\subproblem Prendre le temps de se familiariser avec les différents fichiers créés par Xcode pour un projet de ce type (AppDelegate, ViewController, Storyboard, xib, ...).\\
+Utiliser \texttt{main.storyboard} pour ajouter un bouton et deux labels dans l'application.
+
+\subproblem Récupérer l'action (\texttt{IBAction}) du bouton pour l'evènement \texttt{touchUpInside}, ainsi qu'une référence (\texttt{IBOutlet}) vers chaque label.\\
+Au clic sur le bouton, changer le texte affiché dans les labels.
+
+\subproblem Au clic sur le bouton, afficher la date au moment du clic dans le premier label. Afficher le temps depuis le dernier clic dans le second label.\\
+Utiliser la classe \texttt{NSDate}.
+
+\subproblem En utilisant la classe \texttt{NSDateFormatter}, afficher les information de date et heure dans un format facilement lisible par l'utilisateur.
+
+\end{enumerate}
+
+\end{document}
