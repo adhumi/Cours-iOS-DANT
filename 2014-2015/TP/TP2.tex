@@ -1,0 +1,70 @@
+\documentclass[12pt]{article}
+
+\include{preamble}
+
+\newtoggle{spacingmode}
+%\toggletrue{spacingmode}  %STUDENTS: DELETE or COMMENT this line
+
+\newtoggle{professormode}
+%\toggletrue{professormode} %STUDENTS: DELETE or COMMENT this line
+
+\newcommand{\spc}[1]{\iftoggle{spacingmode}{\\ \vspace{#1cm}}}
+
+
+
+
+\begin{document}
+\homework{LI385 - Introduction au développement iOS}{TP 2 - Architecture et networking}{Adrien Humiliere}{01/04/2015}
+
+\noindent
+
+\textit{A la fin de ce TP :
+\begin{itemize}
+\item Faire une archive contenant les projets Xcode des exercices.
+\item Envoyer l'archive à \underline{\href{mailto:adrien.humiliere@djit.fr}{adrien.humiliere@djit.fr}}.
+\item Le rendu ne sera pas noté mais fera l'objet d'une correction.
+\item Si le TP est fait par plusieurs étudiants, merci de préciser les noms et adresses mail de chacun.
+\end{itemize}}
+ \thispagestyle{plain}
+   \noindent
+   \begin{center}
+\vspace{5mm}
+\framebox{
+      	\vbox{
+		\vspace{2mm}
+      	
+		\textbf{Pour se connecter aux machines :} m2sar/sarM2.\\
+		Ces sessions sont partagées et régulièrement effacées. Ne stockez rien d'important dessus, récupérez vos fichiers et déconnectez vos sessions après usage.
+		
+		\vspace{2mm}
+		Des terminaux (iPod et iPad) sont disponibles pour effectuer vos tests.
+		
+		\vspace{2mm}
+		\textbf{Note importante pour l'utilisation d'Xcode avec les terminaux :}\\ Faire particulièrement attention aux messages d'erreurs concernants les certificats. \\ \textbf{Ne jamais cliquer sur le bouton "Revoque and request"}.\\ En cas de doute, adressez-vous à l'enseignant.
+	
+ 		\vspace{2mm}
+	}
+   }
+   \end{center}
+
+\problem{Client REST} L'objectif de l'exercice (et du TP) est de réaliser un client simple pour afficher des données fournies par une API REST distante. 
+
+Les différentes UI que vous serez amenés à réaliser pendant ce TP devront être harmonieuses et adaptées à toutes les tailles d'écrans grace à AutoLayout. Aidez-vous des appareils disponibles et du simulateur, qui permet d'emuler toutes ces tailles. 
+
+\begin{enumerate}
+
+\subproblem Lancer Xcode et créer un nouveau projet de type Master-Detail Application (iOS > Application > Master-Detail Application). Prendre le temps de se familiariser avec le code généré par Xcode. 
+
+\subproblem A l'aide de la librairie AFNetworking, récupérer les données de la requête \texttt{GET /beers} sur \href{http://openbeerdatabase.com}{openbeerdatabase.com}. Afficher le résultat de la requête dans la console.
+
+\subproblem Créer un Model pour stocker les données récupérées de l'API. Ce Model pourrait prendre la forme d'un singleton, contenant un tableau d'objets \texttt{Beer}, avec les propriétés fournies dans l'API.
+
+\subproblem Dans chaque cellule de la TableView, afficher les données associées à une bière (nom et brasserie). Utiliser les propriétés et styles fournis nativement par la classe \texttt{UITableViewCell}.
+
+\subproblem Au clic sur une cellule, afficher un autre Controller, contenant le nom, la description et le taux de chaque bière.
+
+\bonussubproblem Ajouter un mécanisme permettant d'afficher plus de données si l'utilisateur le souhaite. Au clic sur un bouton ou en arrivant en bas de liste, une nouvelle requête sera faite à l'API et les nouvelles données seront ajoutées à celles déjà présentes dans la liste.
+
+\end{enumerate}
+
+\end{document}

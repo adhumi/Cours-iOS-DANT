@@ -495,6 +495,7 @@
 \newcommand{\intermediatesubproblem}{\inorange{\item} [harder] }
 \newcommand{\hardsubproblem}{\inred{\item} [difficult] }
 \newcommand{\extracreditsubproblem}{\inpurple{\item} [bonus] }
+\newcommand{\bonussubproblem}{\inpurple{\item} [bonus] }
 
 \makeatletter
 \newalphalph{\alphmult}[mult]{\@alph}{26}
@@ -526,4 +527,10 @@
    \rhead{#4}
    \lhead{#2}
    \cfoot{\thepage/\pageref{LastPage}}
+}
+
+\newcommand{\cfbox}[2]{%
+    \colorlet{currentcolor}{.}%
+    {\color{#1}%
+    \fbox{\color{currentcolor}#2}}%
 }
