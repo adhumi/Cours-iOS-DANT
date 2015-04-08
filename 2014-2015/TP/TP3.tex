@@ -1,0 +1,83 @@
+\documentclass[12pt]{article}
+
+\include{preamble}
+
+\newtoggle{spacingmode}
+%\toggletrue{spacingmode}  %STUDENTS: DELETE or COMMENT this line
+
+\newtoggle{professormode}
+%\toggletrue{professormode} %STUDENTS: DELETE or COMMENT this line
+
+\newcommand{\spc}[1]{\iftoggle{spacingmode}{\\ \vspace{#1cm}}}
+
+
+
+
+\begin{document}
+\homework{LI385 - Introduction au développement iOS}{TP 3 - Interfaces personnalisées}{Adrien Humiliere}{08/04/2015}
+
+\noindent
+
+\textit{A la fin de ce TP :
+\begin{itemize}
+\item Faire une archive contenant les projets Xcode des exercices.
+\item Envoyer l'archive à \underline{\href{mailto:adrien.humiliere@djit.fr}{adrien.humiliere@djit.fr}}.
+\item Le rendu ne sera pas noté mais fera l'objet d'une correction.
+\item Si le TP est fait par plusieurs étudiants, merci de préciser les noms et adresses mail de chacun.
+\end{itemize}}
+ \thispagestyle{plain}
+   \noindent
+   \begin{center}
+\vspace{5mm}
+\framebox{
+      	\vbox{
+		\vspace{2mm}
+      	
+		\textbf{Pour se connecter aux machines :} m2sar/sarM2.\\
+		Ces sessions sont partagées et régulièrement effacées. Ne stockez rien d'important dessus, récupérez vos fichiers et déconnectez vos sessions après usage.
+		
+		\vspace{2mm}
+		Des terminaux (iPod et iPad) sont disponibles pour effectuer vos tests.
+		
+		\vspace{2mm}
+		\textbf{Note importante pour l'utilisation d'Xcode avec les terminaux :}\\ Faire particulièrement attention aux messages d'erreurs concernants les certificats. \\ \textbf{Ne jamais cliquer sur le bouton "Revoque and request"}.\\ En cas de doute, adressez-vous à l'enseignant.
+	
+ 		\vspace{2mm}
+	}
+   }
+   \end{center}
+
+\problem{} L'objectif de l'exercice est de personnaliser des éléments d'interface à partir d'une application où l'ensemble du modèle est déjà prêt..
+
+Les différentes UI que vous serez amenés à réaliser pendant ce TP devront être harmonieuses et adaptées à toutes les tailles d'écrans grace à AutoLayout. Aidez-vous des appareils disponibles et du simulateur, qui permet d'emuler toutes ces tailles. 
+
+\begin{enumerate} 
+
+\subproblem Récupérer le projet initial sur \underline{\href{http://adhumi.fr/teaching}{adhumi.fr/teaching}}. L'ouvrir et se familiariser avec les différentes classes et le storyboard.\\
+L'application va simplement chercher une liste de musiques sur le profil d'un utilisateur SoundCloud et affiche ces titres dans une table view.
+
+\subproblem Dans chaque cellule de la table view, essayer d'afficher, en plus du titre, le nom de l'artiste et la durée de la musique. Pour cela, utiliser la propriété \texttt{detailTextLabel} et les différents styles de Table View Cell dans le storyboard. 
+
+\subproblem On se rend rapidement compte des difficultés pour afficher les informations différemment de ce qui est prévu par défaut. Dans ce cas, nous devons créer une subclass de Table View Cell. \\
+Créer une nouvelle classe héritant de \texttt{UITableViewCell}. Dans le storyboard, sélectionner le style \texttt{custom} pour la Table View Cell et indiquer comme Custom class le nom de la classe que vous venez de créer.\\
+Dans cette Cell, ajouter les différents elements UI que vous souhaiterez voir apparaitre et référencez les dans la classe associée. Afficher les données dans ces champs.
+
+\subproblem Tester le rendu de la question précédente sur différents appareils avec le simulateur. Améliorer la vue jusqu'à ce que le rendu soit bon sur chaque appareil (utiliser les contraintes AutoLayout).
+
+\subproblem Pour chaque musique, ajouter l'image d'illustration dans la Cell. Ces images sont hébergées sur un serveur distant, utiliser \texttt{UIImageView+AFNetworking} pour les récupérer.
+
+\bonussubproblem Au clic sur une cellule, afficher une interface permettant de lire la musique associée. Pour cela :
+\begin{itemize}
+\item Créer un nouveau View Controller dans le Storyboard. Déclencher une action \texttt{show} sur ce View Controller au moment ou la cellule est sélectionnée. Compiler : un View Controller vide est affiché au clic sur une ligne.
+
+\item Trouver un moyen de récupérer l'objet que l'on souhaite afficher dans le View Controller affiché.
+
+\item Réaliser dans le View Controller une interface, s'adaptant à tous types d'appareils, permettant d'utiliser un lecteur de musique (bouton Play/Pause, progression de la musique, cover). 
+\end{itemize}
+
+\bonussubproblem A l'aide de la classe \texttt{AVPlayer}, lire la musique dont l'URL est fournie dans le modèle.
+
+
+\end{enumerate}
+
+\end{document}
