@@ -86,6 +86,11 @@ slidenumbers: true
 - Concis
 - Rapide
 
+---
+
+# \# Swift open-source
+
+- Swift.org
 
 ---
 
