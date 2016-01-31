@@ -1,0 +1,46 @@
+\documentclass[12pt]{article}
+
+\include{preamble}
+
+\newtoggle{spacingmode}
+%\toggletrue{spacingmode}  %STUDENTS: DELETE or COMMENT this line
+
+\newtoggle{professormode}
+%\toggletrue{professormode} %STUDENTS: DELETE or COMMENT this line
+
+\newcommand{\spc}[1]{\iftoggle{spacingmode}{\\ \vspace{#1cm}}}
+
+\begin{document}
+\homework{LI385 - Nouvelles Technologies du Web}{Projet - Cahier des charges}{Adrien Humiliere \& Olivier Pitton}{2015/2016}
+
+\noindent
+
+\section*{Application permettant de visualiser ses contacts sur une carte}
+
+Par groupe de 3 ou 4 étudiants, vous devrez réaliser une application iOS et le serveur correspondant permettant à un utilisateur de retrouver ses connaissances sur une carte.
+
+La notation portera sur le serveur et le client iOS à 50/50. Les deux parties devront êtres abordées avec la même rigueur. 
+
+\subsection*{Liste des fonctionnalités attendues}
+\begin{itemize}
+\item Afficher dans le client une carte du lieu désiré
+\item Afficher les emplacements des contacts sur la carte
+\item Créer des comptes utilisateurs
+\item Trouver et ajouter des contacts
+\item Activer/désactiver le partage de sa position
+\item Maintenir la connexion sur le client d?une session à l?autre
+\end{itemize}
+
+\subsection*{Considérations techniques}
+\begin{itemize}
+\item Utilisation de Git, selon le workflow étudié en cours
+\item Client : Swift, iOS 8, iPhone
+\item Serveur : Java 7/8 
+\item Gestionnaires de dépendances : Cocoapods (iOS), Maven (Java)
+\end{itemize}
+
+\vspace{5mm}
+
+Si, et seulement si, votre avancée dans le projet le permet, vous pourrez vous pencher sur des fonctionnalités plus poussées : connexion via un compte social, localisation en temps réel, application universelle iPhone/iPad, etc. Si les fonctionnalités attendues ne sont pas achevées, ces plus ne seront pas pris en compte dans la note finale.
+
+\end{document}
