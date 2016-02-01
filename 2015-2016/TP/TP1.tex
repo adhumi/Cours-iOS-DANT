@@ -1,0 +1,35 @@
+\documentclass[12pt]{article}
+
+\include{preamble}
+
+\newtoggle{spacingmode}
+\newtoggle{professormode}
+
+\newcommand{\spc}[1]{\iftoggle{spacingmode}{\\ \vspace{#1cm}}}
+
+\begin{document}
+\homework{LI385 - Introduction au développement iOS avec Swift}{TP 1}{Adrien Humiliere}{03/02/2015}
+
+\noindent
+
+\textit{A la fin de ce TP :
+\begin{itemize}
+\item Faire une archive contenant les projets Xcode des exercices.
+\item Envoyer l'archive à \underline{\href{mailto:ahumiliere@captaintrain.com}{ahumiliere@captaintrain.com}} avec l'objet \textnormal{[DANT] TP 1 - Prénom Nom}.
+\item Si le TP est fait à plusieurs, préciser les noms et adresses mail de chacun.
+\end{itemize}}
+
+\problem{} 
+L'objectif de l'exercice est de se familiariser avec Xcode et Interface Builder, en réalisant des changements sur un projet et en lançant l'application sur le simulateur.
+
+\begin{enumerate}
+
+\subproblem Ouvrir et lancer (\textbf{command-R}) le projet WordCollage.\\
+Se familiariser avec l'interface d'Xcode. Adapter la taille du simulateur à l'écran en utilisant le menu \textit{Window > Scale}.
+
+\subproblem En utilisant le \textit{Project Navigator}, explorer \textt{Main.storyboard}.\\
+Double-cliquer sur un Label
+
+\end{enumerate}
+
+\end{document}
