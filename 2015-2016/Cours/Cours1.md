@@ -2,7 +2,7 @@ footer: Adrien Humilière // ahumiliere@captaintrain.com // L3 DANT 2015/2016 �
 slidenumbers: true
 
 # Introduction au <br/>**développement iOS** <br/>avec *Swift*
-### Cours 1 // *Intro, dev stack*
+### Cours 1 // *Dev stack, UI*
 
 ---
 
@@ -25,7 +25,7 @@ slidenumbers: true
 # *\#*<br>L'environnement de développement iOS
 
 ---
- 
+
 ![inline 28%](assets/01_ico_objc.png)
 ![inline 28%](assets/01_ico_c.png)
 
@@ -46,7 +46,7 @@ slidenumbers: true
 ^ Utilisé par NeXT, la société créée par Steve Jobs dans le période où il est écarté d'Apple (80's 90's)
 
 ---
- 
+
 ![inline 28%](assets/01_ico_objc.png)
 
 ^ Jusqu'à il y a 2 ans
@@ -90,7 +90,11 @@ slidenumbers: true
 
 # \# Swift open-source
 
-- Swift.org
+- Plateforme [Swift.org](http://www.swift.org)
+- 100% du développement et des choix d'orientation sont publics
+- Tout le monde peut participer
+
+^ Depuis décembre 2015
 
 ---
 
@@ -104,7 +108,7 @@ slidenumbers: true
 
 - Librairies de code
 - Séparés de la librairie standard du language (peuvent provenir d'autres sources/développeurs)
-- Font l'essentiel du gros œuvre 
+- Font l'essentiel du gros œuvre
 - Permettent du dev de plus haut niveau.
 
 ---
@@ -155,15 +159,31 @@ slidenumbers: true
 ^ Xcode
 ^ 5 principaux composants qu'il faut connaitre.
 
+^ Au milieu, c'est **l'éditeur**. Il permet de modifier le code et les interfaces graphiques.
+
+---
+
+![original 100%](assets/01_xcode_toolbar.png)
+
 ^ La **Toolbar** (en haut) contient les controles pour compiler et lancer l'application (Run/Stop buttons) + des indications sur les opérations en cours + un controle sur les sections affichées à l'écran
 
+---
 
-On the left is the Navigator Area, which we use to manage our project assets.
-In the middle is the Editor Area, which we use to edit code and user interfaces.
-- When editing a user interface or Storyboard file, the editor area switches to what we call "Interface Builder."
-On the right is the Utility Area, which we will primarily use to inspect interface attributes.
-- The utility area consists of Inspectors at the top, and the object library at the bottom.
-At the very bottom of the Xcode interface is the Debug Area, which we use to inspect the app log or interact with the debug console.
+![original 100%](assets/01_xcode_navigator.png)
+
+^ Sur la gauche, c'est le **navigateur**, qui permet de gérer toutes les données du projet, de rechercher, etc.
+
+---
+
+![original 100%](assets/01_xcode_utilities.png)
+
+^ La zone **Utilitaire**. Divisée en deux : l'*inspecteur* en haut, la *librairie* en bas.
+
+---
+
+![original 100%](assets/01_xcode_debug.png)
+
+^ En bas, c'estla zone Debug. On l'utilise pour inspecter les logs et interragir avec la console de débug.
 
 ---
 
@@ -179,17 +199,106 @@ At the very bottom of the Xcode interface is the Debug Area, which we use to ins
 
 ---
 
-# \# Patterns
-
-MVC
+# *\#*<br>User Interfaces
 
 ---
 
-# \# Clean code
+![inline](assets/01_screensizes.png)
 
-- Expressive
-- Readable
-- Maintainable over time
+^ Difficulté : les apps iOS se lancent sur une variété de devices (iPhone de differentes tailles, iPad, etc.)
+
+^ Enjeu : créer une version de l'UI qui fonctione pour chaque device, taille d'écran, résolution, orientation, etc. S'adapte aux circonstances.
+
+---
+
+# \# Taille et position
+
+![inline](assets/01_sizingposition.png)
+
+^ Par exemple :
+^ Si on veut placer un composant au milieu de l'écran.
+^ Admettons qu'on dise "245 px du haut, 197 px de la droite"
+^ Qu'est ce qui se passe si je suis sur une autre taille d'écran ? Ou à l'horizontale ?
+
+---
+
+# \# Taille et position
+
+![inline](assets/01_sizingposition_fail.png)
+
+^ reflechir trop specifiquement avec des pixels pose des problemes de positionnement des elements.
+^ possibilité : calculer les tailles et les positions ?
+^ on a mieux : penser relativité et de façon plus abstraite.
+
+---
+
+- Multiplicité des tailles d'écran
+- Différentes orientations
+- Mode fenêtré sur iPad (largeur variable)
+- Impossible d'estimer les tailles en points
+
+-
+
+# → Comment faire ?
+
+---
+
+# \# Abstraction **_(Size classes)_**
+
+![inline](assets/01_sizeclasses_1.png)
+
+^ Remarquez que dans IB on a un canvas carré, pourtant aucun device n'est carré
+^ Ce canvas carré est une taille d'écran abstraite. L'essentiel du design UI se passe ici, et Auto-Layout va s'adapter aux differentes Size Classes
+
+---
+
+# \# Abstraction **_(Size classes)_**
+
+![inline](assets/01_sizeclasses_2.png)
+
+^ ... par exemple celle de l'iphone en portrait : la size class "Compact Width | Regular Height"
+
+^ Il y a differentes size classes que vous serez amener à explorer. Gardez en tete aue vous pouvez toujours utiliser l'assistant d'IB pour avoir un preview des differentes size class (cf. TP)
+
+---
+
+# \# Relativité **_(Constraints)_**
+
+- Les contraintes sont la solution à tout ça
+- Définissent comment les éléments sont positionnés par rapport aux autres
+
+- TextView is **_relative to the vertical and horizontal center of the screen_**
+
+^ autolayout s'occupe du reste, et s'assure que l'UI apparait comme attendu dans les differentes size classes (ou ecrans et orientations)
+
+---
+
+# \# Relativité **_(Constraints)_**
+
+![inline](assets/01_constraints.jpg)
+
+---
+
+# \# Relativité **_(Constraints)_**
+
+```swift
+let constraint = NSLayoutConstraint(item: view,
+                                    attribute: .TrailingMargin,
+                                    relatedBy: .Equal,
+                                    toItem: subView,
+                                    attribute: .TrailingMargin,
+                                    multiplier: 1,
+                                    constant: 0)
+self.addConstraint(constraint)
+```
+
+^ Constraints can be very powerful, and sometimes complex. But we will practice on learning how to create minimal constraints simply and efficiently.
+
+^ The “trick” is to recognize that just because something looks a certain way on the canvas, that does not necessarily mean that this is how it will look on a device. The constraints control how things look. You know that what you see on the canvas, and what you will see in a running app, are the same when the constraints are blue.
+
+^ Xcode highlights differences between “what you will actually see” and “what you see on the canvas” with orange. This is an indication that we should add, or adjust a constraint.
+
+^ Once we practice this a few times, it will become natural to us. The benefit is that we can design our interface once, and Auto Layout will adapt it to as many devices as we wish.
 
 ---
 
