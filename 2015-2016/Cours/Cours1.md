@@ -1,8 +1,12 @@
 footer: Adrien Humilière // ahumiliere@captaintrain.com // L3 DANT 2015/2016    ![inline](assets/by-nc-sa.eu.png)
 slidenumbers: true
 
+![autoplay mute loop](assets/moretrains.mp4)
+
+---
+
 # Introduction au <br/>**développement iOS** <br/>avec *Swift*
-### Cours 1 // *Dev stack, UI*
+### Cours 1 ~ *Dev stack, UI*
 
 ---
 
@@ -14,10 +18,9 @@ slidenumbers: true
 
 # *\#* Aujourd'hui
 
-- Environnement de développement sur iOS
-- Xcode, l'IDE
-
-![right](assets/01_today.jpg)
+- **Environnement** de développement sur iOS
+  - *__Swift, Xcode & Tools__*
+- **User Interface**
 
 ---
 
@@ -30,7 +33,9 @@ slidenumbers: true
 ![inline 28%](assets/01_ico_c.png)
 
 ^ Traditionellement, les apps iOS sont codée avec Objective-C. C'est un langage créé par Brad Cox et Tom Love.
+
 ^ C'est un langage qui existe comme une surcouche du language C.
+
 ^ Utilisé par NeXT, la société créée par Steve Jobs dans le période où il est écarté d'Apple (80's 90's)
 
 ---
@@ -42,7 +47,9 @@ slidenumbers: true
 - Utilisé et propagé par **NeXT** puis **Apple**
 
 ^ Traditionellement, les apps iOS sont codée avec Objective-C. C'est un langage créé par Brad Cox et Tom Love.
+
 ^ C'est un langage qui existe comme une surcouche du language C.
+
 ^ Utilisé par NeXT, la société créée par Steve Jobs dans le période où il est écarté d'Apple (80's 90's)
 
 ---
@@ -58,7 +65,9 @@ slidenumbers: true
 ![inline 28%](assets/01_ico_swift.png)
 
 ^ En juin 2014, Apple a annoncé un nouveau langage de programmation : Swift
-^ Créé par Chris Lattner et toute une équipe qui s'est mise en palce autour de lui @ Apple.
+
+^ Créé par Chris Lattner et toute une équipe qui s'est mise en place autour de lui @ Apple.
+
 ^ Swift inclus des concepts issues d'un grand nombre de langages de programmation modernes.
 
 ---
@@ -70,6 +79,12 @@ slidenumbers: true
 - **Open-source**
 - Inspiré d'un grand nombre de langages de programmation moderne
 
+^ En juin 2014, Apple a annoncé un nouveau langage de programmation : Swift
+
+^ Créé par Chris Lattner et toute une équipe qui s'est mise en place autour de lui @ Apple.
+
+^ Swift inclus des concepts issues d'un grand nombre de langages de programmation modernes.
+
 ---
 
 ![fit](assets/01_whyuno_objc.jpg)
@@ -80,21 +95,28 @@ slidenumbers: true
 
 # \# Swift
 
-- Débarassé de l'héritage du C
-- Moderne
-- Robuste
-- Concis
-- Rapide
+- Débarassé de l'**héritage du C**
+- **Moderne**
+- **Robuste**
+- **Concis**
+- **Rapide**
+
+---
+
+# \# Swift
+
+> The Swift Programming Language greatly benefited from the experiences hard-won by many other languages in the field, drawing ideas from Objective-C, Rust, Haskell, Ruby, Python, C#, CLU, and far too many others to list.
+-- _**Chris Lattner**_
 
 ---
 
 # \# Swift open-source
 
-- Plateforme [Swift.org](http://www.swift.org)
-- 100% du développement et des choix d'orientation sont publics
+- Plateforme **_[Swift.org](http://www.swift.org)_**
+- 100% du développement et des choix d'orientation sont **publics**
 - Tout le monde peut participer
 
-^ Depuis décembre 2015
+^ Depuis décembre 2015, pas immediatement, mais avec tout l'historique
 
 ---
 
@@ -102,14 +124,18 @@ slidenumbers: true
 
 ![inline](assets/01_compiler.png)
 
+^ standard : le compiler transforme le code readable en code machine
+
+^ LLDB, lui aussi open source. Utilisé pour ObjC aussi depuis 2004 (auparavant GCC). Tres puissant, notamment pour le debug.
+
 ---
 
 # \# Frameworks
 
-- Librairies de code
-- Séparés de la librairie standard du language (peuvent provenir d'autres sources/développeurs)
-- Font l'essentiel du gros œuvre
-- Permettent du dev de plus haut niveau.
+- **Librairies** de code
+- Séparés de la librairie standard du langage (peuvent provenir d'autres sources/développeurs)
+- Font l'essentiel du **gros œuvre**
+- Permettent d'écrire du code de plus haut niveau
 
 ---
 
@@ -117,8 +143,8 @@ slidenumbers: true
 
 **Exemple :** *Lire de l'audio*
 
-- Pas besoin d'écrire tout le code bas niveau pour s'interfacer avec les hauts-parleurs ou le casque.
-- Utiliser une classe d'audio player d'un des frameworks fournis.
+- **Pas besoin d'écrire tout le code bas niveau** pour s'interfacer avec les hauts-parleurs ou le casque.
+- Utiliser une classe d'Audio Player d'un des frameworks fournis.
 
 ^ AVAudioPlayer, AVPlayer, Frameworks bas niveau quand même pour les configurations plus complexes
 
@@ -128,9 +154,13 @@ slidenumbers: true
 
 ![inline](assets/01_frameworks.jpg)
 
+^ 71 frameworks différents
+
 ---
 
 ![inline](assets/01_frameworks_main.png)
+
+^ Essentiellement une dizaine
 
 ---
 
@@ -139,6 +169,8 @@ slidenumbers: true
 ![inline](assets/01_ico_xcode.png)![inline](assets/01_ico_intruments.png)![inline](assets/01_ico_simu.png)
 
 ^ Un certain nombre d'outils qui simplifient le travail de développement et de débug.
+
+^ Ici : Xcode, Instruments, iOS Simulator
 
 ---
 
@@ -191,13 +223,19 @@ slidenumbers: true
 
 - Monitoring sur ce qui se passe dans l'application pendant son exécution
 
+![inline](assets/01_instruments.png)
+
 ---
 
 # \# iOS Simulator
 
 - Permet de lancer l'application iOS en cours de développement sur le Mac comme si elle s'executait sur un device iOS
 
+![right](assets/01_simulator.png)
+
 ---
+
+![](assets/01_cockpit.jpg)
 
 # *\#*<br>User Interfaces
 
@@ -258,7 +296,7 @@ slidenumbers: true
 
 ^ ... par exemple celle de l'iphone en portrait : la size class "Compact Width | Regular Height"
 
-^ Il y a differentes size classes que vous serez amener à explorer. Gardez en tete aue vous pouvez toujours utiliser l'assistant d'IB pour avoir un preview des differentes size class (cf. TP)
+^ Il y a differentes size classes que vous serez amener à explorer. Gardez en tete que vous pouvez toujours utiliser l'assistant d'IB pour avoir un preview des differentes size class (cf. TP)
 
 ---
 
@@ -267,7 +305,7 @@ slidenumbers: true
 - Les contraintes sont la solution à tout ça
 - Définissent comment les éléments sont positionnés par rapport aux autres
 
-- TextView is **_relative to the vertical and horizontal center of the screen_**
+- "TextView is **relative to the vertical and horizontal center of the screen**"
 
 ^ autolayout s'occupe du reste, et s'assure que l'UI apparait comme attendu dans les differentes size classes (ou ecrans et orientations)
 
@@ -292,7 +330,11 @@ let constraint = NSLayoutConstraint(item: view,
 self.addConstraint(constraint)
 ```
 
-^ Constraints can be very powerful, and sometimes complex. But we will practice on learning how to create minimal constraints simply and efficiently.
+^ C'est un mecanisme tres puissant et parfois un peu complexe. Mais avec un peu de pratique on arrive à creer des intefaces sympas qui s'adaptent a tous les ecrans sans faire trop d'efforts.
+
+---
+
+![inline](assets/01_autolayout_example.gif)
 
 ^ The “trick” is to recognize that just because something looks a certain way on the canvas, that does not necessarily mean that this is how it will look on a device. The constraints control how things look. You know that what you see on the canvas, and what you will see in a running app, are the same when the constraints are blue.
 

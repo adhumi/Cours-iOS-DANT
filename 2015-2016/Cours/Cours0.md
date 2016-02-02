@@ -1,6 +1,10 @@
 footer: Adrien Humilière // ahumiliere@captaintrain.com // L3 DANT 2015/2016    ![inline](assets/by-nc-sa.eu.png)
 slidenumbers: true
 
+![autoplay mute loop](assets/moretrains.mp4)
+
+---
+
 ![](assets/00_hp.jpg)
 
 #[fit] UE _LI385_
@@ -8,11 +12,11 @@ slidenumbers: true
 
 ---
 
-# Olivier Pitton 
+# Olivier Pitton / Backend
 
 - Cloud, DevOps
 
-# Adrien Humilière
+# Adrien Humilière / Frontend
 
 - Développement iOS, Swift
 
@@ -61,13 +65,13 @@ Ingénieur iOS @ **Captain Train**
 
 #[fit] **9 semaines** × **2h45**<br/>**1h cours** + **1h45 TP**
 # ~
-## Le mercredi de 9h30 à 12h15<br/>14-15, salle 504
+## Le mercredi de 9h30 à 12h15<br/>14-15, salle 409
 
---- 
+---
 
 #[fit] 50% **backend** + 50% **frontend** (iOS)
 # ~
-## **TP** notés 
-## **Projet** final 
+## **TP** notés
+## **Projet** final
 
 ^ TP notés : Tous notés, moyenne sur les 4 ou 5 meilleures TPs.
