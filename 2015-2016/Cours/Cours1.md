@@ -352,10 +352,20 @@ self.addConstraint(constraint)
 
 - Ne jamais éteindre les macs
 - Fermer la session en partant
-- Ne pas laisser de fichiers (sessions partagées)
+- Ne pas laisser de fichiers (sessions partagées, tout peut disparaitre)
 
-Salle accessible en libre service,
-tous les jours de Xh à XXh *(si pas de cours)*
+Cette salle est accessible en libre service, tous les jours aux heures ouvrables *(si pas de cours)*
+
+---
+
+# \# Pratiquer à la maison
+
+- Un Mac ? Installer Xcode (Mac App Store)
+  **Seule façon de compiler une vraie application.**
+- Un PC sous Linux ? C'est possible
+- Sur le web : [swiftlang.ng.bluemix.net](http://swiftlang.ng.bluemix.net)
+- Compte développeur (gratuit) pour tester sur device
+  - [developer.apple.com](http://developer.apple.com)
 
 ---
 

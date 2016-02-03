@@ -14,7 +14,7 @@ slidenumbers: true
 
 # Olivier Pitton / Backend
 
-- Cloud, DevOps
+- Cloud, Web, DevOps
 
 # Adrien Humilière / Frontend
 
@@ -54,24 +54,25 @@ Ingénieur iOS @ **Captain Train**
 - Outils de dev
 - Swift
 - Interfaces graphiques
+- SDK iOS
 
 ---
 
 # *\#* Prérequis ?
 
-- Connaissance des principes de la Programmation Orientée Objet (Java)
+- Connaissance des principes de la Programmation Orientée Objet (ex : Java)
 
 ----
 
 #[fit] **9 semaines** × **2h45**<br/>**1h cours** + **1h45 TP**
-# ~
-## Le mercredi de 9h30 à 12h15<br/>14-15, salle 409
+#~
+## *_Le mercredi de 9h30 à 12h15<br/>14-15, salle 409_*
 
 ---
 
 #[fit] 50% **backend** + 50% **frontend** (iOS)
 # ~
-## **TP** notés
-## **Projet** final
+## *_TP notés_*
+## *_Projet final_*
 
 ^ TP notés : Tous notés, moyenne sur les 4 ou 5 meilleures TPs.
