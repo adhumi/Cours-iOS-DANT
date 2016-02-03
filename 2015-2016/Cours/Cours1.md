@@ -373,3 +373,9 @@ Disponibles en TP et empruntables au secrétariat
 
 - Login : `m2sar`
 - Password : `sarm2`
+
+-
+
+Ressources (slides, TP, etc.)
+
+- [adhumi.fr/teaching](http://adhumi.fr/teaching)
