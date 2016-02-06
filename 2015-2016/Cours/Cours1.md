@@ -382,7 +382,7 @@ Disponibles en TP et empruntables au secrétariat
 # **\#** Salle Mac
 
 - Login : `m2sar`
-- Password : `sarm2`
+- Password : `sarM2`
 
 -
 
