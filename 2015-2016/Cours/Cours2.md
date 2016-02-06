@@ -6,7 +6,7 @@ slidenumbers: true
 ---
 
 # Introduction au <br/>**développement iOS** <br/>avec *Swift*
-### Cours 2 ~ * *
+### Cours 2 ~ *Introduction à Swift*
 
 ---
 
@@ -17,6 +17,14 @@ slidenumbers: true
 ---
 
 # *\#* Aujourd'hui
+
+Découverte de **Swift :**
+
+- **Syntaxe** de Swift
+- **POO** avec Swift
+- **Classes, objets, méthodes**
+- **Types de données et collections**
+- **Qualité** du code
 
 ----
 
