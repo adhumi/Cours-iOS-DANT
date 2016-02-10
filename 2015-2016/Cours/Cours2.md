@@ -40,13 +40,12 @@ Découverte de **Swift :**
 
 ## Versions de Swift
 
-- 1.0
-- 1.1
-	- __*1.2*__ 
-- 2.0
-- 2.1
-- 2.2
-- 3.0
+- 1.0 *(septembre 2014)*
+- 1.1 *(octobre 2014)*
+	- __1.2__  *(avril 2015)*
+- 2.0 *(septembre 2015)*
+- 2.1 *(décembre 2015)*
+- 2.2 *(not yet released)*
 
 ---
 
@@ -57,10 +56,10 @@ Découverte de **Swift :**
 
 # \# Premier programme en Swift
 
-- Hello world en Swift
+- **Hello world!** en Swift
 
 ```swift
-print("Hello, World!")
+println("Hello, World!")
 ```
 
 ^ Qu'est ce que vous remarquez de particulier ?
@@ -72,7 +71,7 @@ print("Hello, World!")
 
 # \# Premier programme en Swift
 
-- Hello world en Java
+- **Hello world!** en Java
 
 ```java
 public class Main {
@@ -86,7 +85,7 @@ public class Main {
 
 # \# Premier programme en Swift
 
-- Hello world en Objective-C
+- **Hello world!** en Objective-C
 
 ```objc
 #import <Foundation/Foundation.h>
@@ -360,7 +359,7 @@ tableau[0] = "Xue"
 - Même comportement que les tableaux
 
 ```swift
-let dictionnaire: [String: String] = [
+var dictionnaire: [String: String] = [
 	"ios": "Adrien Humilière",
 	"backend": "Olivier Pitton"
 ]
@@ -378,7 +377,7 @@ let tableauVide = [String]()
 let dictionnaireVide = [String: Float]()
 ```
 
-^ Pourquoi c'est complètement con ?
+^ Pourquoi c'est complètement con cet exemple ?
 
 ---
 
@@ -400,12 +399,12 @@ let dictionnaireVide = [String: Float]()
 
 # \# Control flow
 
-- if
+- **if**
 
 ```swift
-if moyenne > 16 {
+if moyenne >= 16 {
     println("Très bien")
-} else if moyenne > 10 {
+} else if moyenne >=‰ 10 {
     println("Bien")
 } else {
     println("Pas bien")
@@ -433,11 +432,28 @@ default:
 
 ^ Standard ++ : String, conditions. Très varié. Très utilisé
 
+^ S'atardr un peu pour expliquer les concepts
+
 ---
 
 # \# Control flow
 
-- C-style for-loop
+- C-style **for-loop**
+
+```swift
+for var i = 0; i < 10; ++i {
+    // …
+}
+```
+
+^ On peut faire ça. Ca marche très bien. Mais c'est déprécié dans Swift 2.2 et ça sera supprimé dans 3.0.
+La solution ? 
+
+---
+
+# \# Control flow
+
+- C-style **for-loop** **_DÉPRÉCIÉ_**
 
 ```swift
 for var i = 0; i < 10; ++i {
@@ -458,7 +474,7 @@ for var i = 0; i < 10; ++i {
 }
 ```
 
-- Swift for-in equivalent
+- Swift **for-in** equivalent
 
 ```swift
 for i in 0..<10 {
@@ -466,13 +482,13 @@ for i in 0..<10 {
 }
 ```
 
-^ 0..<100 créée un range
+^ 0..<10 créée un range. Expliquer pourquoi, contribution open-source.
 
 ---
 
 # \# Control flow
 
-- while & do-while
+- **while** & **do-while**
 
 ```swift
 while n < 100 {
@@ -485,6 +501,8 @@ do {
     m += m
 } while m < 100
 ```
+
+^Pour tout le reste il y while et do-while :-)
 
 ---
 
@@ -501,7 +519,8 @@ func maFonction(argument: Int) -> String {
 	return "L'argument est \(argument)"
 }
 
-print(maFonction(2016))
+let resultat = maFonction(2016)
+println(resultat)
 // L'argument est 2016
 ```
 
@@ -548,6 +567,8 @@ class MaClasse: MaClasseMere {
 
 -> La classe `MaClasse` hérite de `MaClasseMere`
 
+^ sur iOS, presque tout hérite de NSObject, classe de base du framework Foundation. Mais rien d'obligatoire si bien séparé de la logique système / bonne abstraction.
+
 ---
 
 # \# Objets et classes **_Initialisation_**
@@ -565,6 +586,24 @@ class MaClasse {
 	}
 }
 ```
+
+^ Tout doit être affecté à l'initialisation. Soit dans init()...
+
+---
+
+# \# Objets et classes **_Initialisation_**
+
+```swift
+class MaClasse {
+	var maPropriete: String = "DANT"
+	
+	init(name: String) {
+		maPropriete = name
+	}
+}
+```
+
+^ ...soit avec des valeurs par défaut. (même résultat ici)
 
 ---
 
@@ -585,6 +624,14 @@ println(objet2.maPropriete)
 ![](assets/02_terminus.jpg)
 
 # *The* end
+
+---
+
+# \# TP du jour
+
+Application en ligne de commande.
+
+Voir **TP 2** sur [adhumi.fr/teaching](http://adhumi.fr/teaching)
 
 ---
 
