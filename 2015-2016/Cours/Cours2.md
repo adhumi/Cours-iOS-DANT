@@ -629,9 +629,14 @@ println(objet2.maPropriete)
 
 # \# TP du jour
 
-Application en ligne de commande.
+- Application en ligne de commande.
 
-Voir **TP 2** sur [adhumi.fr/teaching](http://adhumi.fr/teaching)
+- Voir **TP 2** sur [adhumi.fr/teaching](http://adhumi.fr/teaching)
+
+**Dernier TP :**
+
+- 4.3/5 en moyenne. 
+- 2 non-rendus
 
 ---
 
