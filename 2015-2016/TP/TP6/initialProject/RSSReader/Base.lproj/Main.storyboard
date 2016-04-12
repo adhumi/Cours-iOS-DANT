@@ -3,6 +3,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Item 2-->
@@ -54,12 +56,26 @@
                     <view key="view" contentMode="scaleToFill" id="78M-bY-8SI">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z7I-95-ES1">
+                                <rect key="frame" x="0.0" y="151" width="51" height="31"/>
+                            </switch>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WBm-Sz-Fze">
+                                <rect key="frame" x="45" y="83" width="51" height="31"/>
+                            </switch>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="WBm-Sz-Fze" firstAttribute="top" secondItem="B0G-ki-dgC" secondAttribute="bottom" constant="63" id="1lD-Iv-sB4"/>
+                            <constraint firstItem="z7I-95-ES1" firstAttribute="top" secondItem="WBm-Sz-Fze" secondAttribute="bottom" constant="37" id="EWQ-dn-AFi"/>
+                            <constraint firstItem="z7I-95-ES1" firstAttribute="leading" secondItem="WBm-Sz-Fze" secondAttribute="leading" multiplier="0.3" id="KHc-uj-cEj"/>
+                            <constraint firstItem="WBm-Sz-Fze" firstAttribute="leading" secondItem="78M-bY-8SI" secondAttribute="leadingMargin" constant="100" id="Nso-Wq-NsV"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cNd-RC-QQ8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1535" y="329"/>
+            <point key="canvasLocation" x="1625" y="569"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="ahF-9n-JJT">
