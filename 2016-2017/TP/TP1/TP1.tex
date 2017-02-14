@@ -13,74 +13,68 @@
 \section*{Part 1}
 
 \begin{itemize}
-\item Open and run (\keys{\cmd+R}) the \textbf{Flashlight project}.
+\item Open, build and run (\keys{\cmd+R}) the \textbf{Flashlight} project.
 \item Observe the size of the simulator on the screen. Use the menu item \menu[,]{Window,Scale} to adjust the size of the simulator screen       .
-\item Discuss what happens when opening a project and running it in the iOS Simulator, using the vocabulary terms as a guide.
-\item Demonstrate keyboard shortcuts \keys{\cmd+R}, \keys{\cmd+\tab} and \keys{\cmd+.} to run the app; switch to the simulator and back; and to stop the app from Xcode.
-\item Present the Xcode interface anatomy.
-\item Open and run (\keys{\cmd+R}) the \textbf{WordCollage} project.
-\item Using the Project Navigator (\keys{\cmd+1}), explore \textbf{Main.storyboard}.
-\item Using the Show Document Outline control (\inlinegraphics{../assets/show-document-outline.png}) in the lower left corner of the canvas, ensure that the document outline is visible.
-\item Double-click a Label in the collage to change its contents.
-\item Emphasize using the \keys{\cmd+R} shortcut to run the app.
-\item Run the app (\keys{\cmd+R}), and witness the change in the iOS Simulator.
-\item Experiment with changing the content of the remaining labels to topics you care about.
-\item Run the app (\keys{\cmd+R}), and witness the changes in the Simulator.
+\item This is a really basic application template. Use it to discover Xcode interface anatomy.
+\item Use \keys{\cmd+\tab} and \keys{\cmd+.} to switch to the simulator and back; and to stop the app from Xcode.
 \end{itemize}
 
 \section*{Part 2}
 
 \begin{itemize}
+\item Open and run (\keys{\cmd+R}) the \textbf{WordCollage} project.
+\item Using the Project Navigator (\keys{\cmd+1}), explore \textbf{Main.storyboard}.
+\item Using the Show Document Outline control (\inlinegraphics{../assets/show-document-outline.png}) in the lower left corner of the canvas, ensure that the document outline is visible.
+\item Double-click a Label in the collage to change its contents.
+\item Run the app (\keys{\cmd+R}), and witness the change in the iOS Simulator.
+\item Experiment with changing the content of the remaining labels to topics you care about.
+\item Run the app (\keys{\cmd+R}), and witness the changes in the Simulator.
+\end{itemize}
+
+\section*{Part 3}
+
+\begin{itemize}
 \item Use the Project Navigator (\keys{\cmd+1}) to select Main.storyboard.
 \item Run the app (\keys{\cmd+R}), and observe how the visual layout of the collage appears different in the iOS Simulator.
-\item Present the concept of Adaptive User Interfaces.
 \item Using the Object Library (\keys{\Alt+\cmd+L}), place a new Label on the interface. Change the Label contents (e.g. "Learn to Code") and use the Attributes Inspector (\keys{\Alt+\cmd+4}) to change the font family, size and color (e.g. 51pt Avenir Next Ultra Light).
 \item Use the Label handles to expand its size, and adjust the Label position.
 \item Run the app (\keys{\cmd+R}), and observe how the Label position appears differently in the iOS Simulator.
-\item Explain that position constraints must be added to the Label to influence its position.
+\item Position constraints must be added to the Label to influence its position.
 \item With the Label selected, use the Pin control to select a Vertical Space constraint relative to the View.
 \begin{figure}[h]
 	\begin{center}
    \includegraphics[width=200pt]{pin_constraint.png}
 	\end{center}
 \end{figure}
-\item Discuss how Interface Builder displays a vertical blue bar representing the Vertical Space constraint.
-\item Explain how missing constraints result in Interface Builder displaying Auto Layout issues in orange.
+\item Interface Builder displays a vertical blue bar representing the Vertical Space constraint. Missing constraints result in Interface Builder displaying Auto Layout issues in orange.
 \item With the Label selected, use the Align control to select a Center X Alignment constraint based on the current position of the Label.
 \begin{figure}[h]
 	\begin{center}
    \includegraphics[width=200pt]{align_constraint.png}
 	\end{center}
 \end{figure}
-\item Discuss how Interface Builder displays another vertical blue bar representing the Center X Alignment constraint.
+\item Interface Builder displays another vertical blue bar representing the Center X Alignment constraint.
 \item Using the Show Document Outline control (\inlinegraphics{../assets/show-document-outline.png}) in the lower left corner of the canvas, ensure that the document outline is visible.
-\item Discuss how Interface Builder displays one remaining Auto Layout issue in orange, and use the Issue Navigator (\keys{\cmd+4}) or the Document Outline disclosure arrow (\inlinegraphics{../assets/disclosure_arrow.png}) to observe the details of the remaining Auto Layout issue.
+\item Interface Builder displays one remaining Auto Layout issue in orange. Use the Issue Navigator (\keys{\cmd+4}) or the Document Outline disclosure arrow (\inlinegraphics{../assets/disclosure_arrow.png}) to observe the details of the remaining Auto Layout issue.
 \item With the Label selected, use the menu item \menu[ > ]{Editor > Resolve Auto Layout Issues > Update Frames} so the frame matches the constraint. Alternatively, use the menu item \menu[ > ]{Editor > Resolve Auto Layout Issues > Update Constraints} so the constraints match the frame.
 \item Run the app (\keys{\cmd+R}) and observe how the Label appears in a better position, but still appears somewhat different.
-\item Using Interface Builder, select the Compact Width | Regular Height size class.
-\item Explain how different size classes apply to different devices and orientations.
-\item While viewing the canvas in Interface Builder, open the Assistant Editor (\keys{\Alt+\cmd+\return}), and use the Assistant Editor jump bar to select the Preview item.
-\item Delete the default iPhone 4-inch preview, and use the Add button in the lower left corner of the Preview to add an iPhone 4.7-inch preview.
-\item Discuss how the preview closely resembles the app in the iOS Simulator.
 \item Within the Interface Builder canvas, select the recently added Label, adjust its position, update the constraints (\keys{\Alt+\cmd+=}), and observe how the preview automatically reflects the change.
 \item Run the app (\keys{\cmd+R}) and observe how the Label appears as expected within the iOS Simulator.
 \item Rotate the app (\keys{\cmd+\arrowkeyright}) within the iOS Simulator, and observe how the label appears in a different position when in a landscape orientation.
-\item Using Interface Builder, select the Any Width | Compact Height size class, and rotate the orientation of the preview.
-\item Select the recently added Label, adjust its position, update the constraints (\keys{\shift+\cmd+=}), and observe how the preview automatically reflects the change.
+\item Select the recently added Label, adjust its position, update the constraints (\keys{\shift+\cmd+=}).
 \item Run the app (\keys{\cmd+R}), rotate the app (\keys{\cmd+\arrowkeyright}) in the Simulator, and observe the Label appearing in the expected position.
 \end{itemize}
 
-\section*{Part 3}
+\section*{Part 4}
 
 \begin{itemize}
-\item Using Interface Builder, ensure that the Any Width | Any Height size class is active, and use the Object Library (\keys{\Alt+\cmd+L}) to place a Button on the interface.
-\item With the button selected, briefly demonstrate the Identity (\keys{\Alt+\cmd+3}), Attributes (\keys{\Alt+\cmd+4}) and Size (\keys{\Alt+\cmd+5}) Inspectors.
+\item Using Interface Builder and the Object Library (\keys{\Alt+\cmd+L}) to place a Button on the interface.
+\item With the button selected, discover the Identity (\keys{\Alt+\cmd+3}), Attributes (\keys{\Alt+\cmd+4}) and Size (\keys{\Alt+\cmd+5}) Inspectors.
 \item Using Interface Builder, change the text of the button to "Change Background."
 \item Run the app (\keys{\cmd+R}) and observe how the button appears in a different location within the iOS Simulator.
 \item Using Interface Builder, Control-drag from the Button downward to the View, and select Bottom Space to Bottom Layout Guide to create a Vertical Space constraint.
 \item With the Button still selected, use the Align control and select Horizontal Center in Container to create a Center X Alignment constraint.
 \item Run the app (\keys{\cmd+R}), tap the button, and observe that nothing happens.
-\item Present the iOS tools and technologies, including Swift, Cocoa Touch / iOS SDK, Instruments, the iOS Simulator, LLVM/Clang Compiler, Xcode anatomy, Xcode shortcuts, the components of an Xcode project, storyboards and interface components, and MVC.
 \item While viewing the storyboard in Interface Builder, open the Assistant Editor (\keys{\Alt+\cmd+\return}).
 \item Using the Show Document Outline control (\inlinegraphics{../assets/show-document-outline.png}) in the lower left corner of the canvas, ensure that the document outline is visible.
 \item Using the Document Outline, Control-click the button and drag a connection from the Touch Up Inside connection well to the controller, to create an Action connection. Use the name \texttt{changeBackgroundColor} and the Type \texttt{UIButton}.
@@ -97,11 +91,11 @@
 	view.backgroundColor = UIColor.blackColor()
 }
 \end{lstlisting}
-\item Using the Xcode Documentation and API Reference (\keys{\shift+\cmd+0}), demonstrate searching for \texttt{UIColor} to discover other "easy" colors.
+\item Using the Xcode Documentation and API Reference (\keys{\shift+\cmd+0}), discover the documentation for \texttt{UIColor} to discover other "easy" colors.
 \item Run the app (\keys{\cmd+R}), tap the button, and witness the background color change.
 \end{itemize}
 
-\section*{Part 4}
+\section*{Part 5}
 
 \begin{itemize}
 \item Change the label of the existing Button contents to "Black."
@@ -134,7 +128,7 @@
 \end{lstlisting}
 \item Rename \texttt{changeBackgroundColor:} to \texttt{changeBackgroundColorToBlack:}, and observe that the adjacent connection well appears hollow.
 \item Run the app (\keys{\cmd+R}), tap the Black button, and witness the app crash. Stop the app (\keys{\cmd+.}).
-\item Explain that the app crashed because Interface Builder still tries to connect the button to the \texttt{changeBackgroundColor:} method, which no longer exists.
+\item The app crashed because Interface Builder still tries to connect the button to the \texttt{changeBackgroundColor:} method, which no longer exists.
 \item Using Interface Builder and the connection overlay, delete the old connection, establish a new connection to \texttt{changeBackgroundColorToBlack:}, and observe the connection well reappear.
 \item Run the app (\keys{\cmd+R}), tap the buttons and witness the background color changing.
 \end{itemize}
