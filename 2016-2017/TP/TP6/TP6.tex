@@ -1,0 +1,192 @@
+\documentclass[a4paper,11pt]{scrartcl}
+\input{../common_definitions.tex}
+
+\begin{document}
+
+\newcommand{\mytitle}{TP 6 - Flashcard}
+\title{\mytitle}
+\author{Adrien Humilière}
+\date{30/03/2017}
+
+\maketitle
+
+\section*{Part 1}
+
+\begin{itemize}
+\item Create a new – Single View Application – project.
+\item Using Interface Builder, add a Label and change its name to \textbf{Flashcard Term}. Add layout constraints to the label to set its vertical position and to center it within the view.
+\item The user will navigate between the front and back of different flashcards. iOS provides navigation controllers to automatically manage transitions between multiple view controllers.
+\item Add a Navigation Controller to the storyboard. Interface Builder adds both a navigation controller and a table view controller. Delete the table view controller from the storyboard.
+\item Arrange the Navigation Controller to the left of the existing View Controller. Move the incoming arrow on the main View Controller to the Navigation Controller, to indicate that it is the initial view controller for the app. Control drag from the Navigation Controller to the View Controller, and select the \texttt{rootViewController} Relationship Segue.
+\item The navigation controller acts as a container that manages navigation between different view controllers, such as the flashcard term view controller and the yet-to-be-created definition view controller. Interface Builder automatically adds a navigation bar to the top of any view controllers that the navigation controller manages.
+\item Select the Flashcard Term label, and use the \menu[ > ]{Editor > Resolve Auto Layout Issues > Update Frames} menu item to adjust the constraint issue caused by the navigation bar.
+\item Select the navigation bar at the top of the View Controller, and set the title to \textit{Term}.
+\item Rename the View Controller to Term Controller.
+\item Drag a new Bar Button Item to the navigation bar in the Term Controller, and change the button title to Definition.
+\item Run the app, and observe how the Term Controller view appears with a navigation bar and button at the top.
+\item Using Interface Builder, add another View Controller to the storyboard, placing it to the right of the Term Controller.
+\item Rename the new View Controller to Definition Controller.
+\item Drag a Text View, for holding lots of text, onto the Definition Controller interface. Add layout constraints by Control-dragging from the text view on the canvas to the View in the Document Outline. Create constraints for the leading, trailing, top and bottom space relative to the View.
+\item Control-drag from the Definition button to the Definition Controller, select the show segue, and observe how Interface Builder represents the new relationship with an arrow between the two view controllers. Segues represent transitions from one view controller to another.
+\item Update the constraints to align with the navigation bar.
+\item Drag a Navigation Item onto the view and set the title to \textit{Definition}.
+\item Run the app, observe the term appear, tap the Definition button, and observe the definition appear. Tap the Term button and observe the transition back to the term view. The navigation controller automatically manages the back button.
+\end{itemize}
+
+\section*{Part 2}
+
+\begin{itemize}
+\item We now need a \texttt{Flashcard} model, to encapsulate a term and its definition. Add a new \texttt{Flashcard} class to the project.
+\item Declare \texttt{String} properties in the \texttt{Flashcard} class for a \texttt{term} and \texttt{definition}. Observe the error notice in the Xcode editor, that indicates the need for an initializer. Implement a parameterless initializer in the \texttt{Flashcard} class, with default values for \texttt{term} and \texttt{definition}.
+\item Add a parameterized initializer to the \texttt{Flashcard} class, taking a term and its definition in parameters.
+\begin{lstlisting}
+init(term: String, definition: String) {
+	self.term = term
+	self.definition = definition
+}
+\end{lstlisting}
+\item The two initializers contain duplicate code that assigns initial values to each property. Update the parameterless initializer to invoke the parameterized initializer.
+\item Observe the error notice in the Xcode editor, indicating the need to declare the parameterless initializer as a convenience initializer. Update the parameterless initializer, declaring it as a convenience initializer.
+\item The interface needs to display a Flashcard term in the main view of the Term Controller scene.
+\item Using Interface Builder, create an outlet for the term label as a \texttt{ViewController} property.
+\item Update the label in \texttt{viewDidLoad} to use a default \texttt{Flashcard} object term.
+\item Run the app, and observe the label text.
+\end{itemize}
+
+\section*{Part 3}
+
+\begin{itemize}
+\item We now need for a \texttt{Deck} model, representing a collection of \texttt{Flashcard} objects. Add a new \texttt{Deck} class to the project.
+\item The Deck model will manage a collection of \texttt{Flashcard} objects, but the controller will use methods to "ask" a \texttt{Deck} for a card, rather than accessing the collection of \texttt{Flashcard} objects directly. Add a \texttt{private} \texttt{[Flashcard]} property to the \texttt{Deck} class.
+\begin{lstlisting}
+private var cards = [Flashcard]()
+\end{lstlisting}
+\item The cards property is \texttt{private} to hide how the \texttt{Deck} class manages the collection of \texttt{Flashcard} objects. Initializing a \texttt{Deck} should fill the cards array with a collection of \texttt{Flashcard} objects.
+\item Implement the \texttt{Deck} initializer, using a dictionary of term-definition pairs for \texttt{Flashcard} objects.
+\begin{lstlisting}
+init() {
+	let cardData = [
+		"controller outlet" : "A controller view property, marked with IBOutlet.",
+		"controller action": "A controller method, marked with IBAction, that is triggered by an interface event."
+	]
+	for (term, definition) in cardData {
+		cards.append(Flashcard(term: term, definition: definition))
+	}
+}
+\end{lstlisting}
+\item The initializer is transforming an array of flashcard data into an array of Flashcard objects. It is a good opportunity for using \texttt{map} method. Replace the for-in loop with a verbose call of map.
+\begin{lstlisting}
+cards = cardData.map(
+	{ (term: String, definition: String) -> Flashcard in
+		return Flashcard(term: term, definition: definition)
+	})
+\end{lstlisting}
+\item The \texttt{map} function is passed a closure expression; it invokes the closure for each key-value pair in the dictionary, builds an array with each returned \texttt{Flashcard} object, and assigns the resulting array to the cards property. Swift can infer the type of the closure expression from the data type of the \texttt{cardData} dictionary and the cards array. Refactor the \texttt{map} call, removing the explicit type annotations.
+\begin{lstlisting}
+cards = cardData.map( { term, definition in
+	return Flashcard(term: term, definition: definition)
+})
+\end{lstlisting}
+\item Because the closure expression only contains one statement, Swift also infers an implicit \texttt{return}. Refactor the \texttt{map} call, removing the explicit \texttt{return}.
+\begin{lstlisting}
+cards = cardData.map( { term, definition in
+	Flashcard(term: term, definition: definition)
+})
+\end{lstlisting}
+\item Because the closure expression is the last argument to \texttt{map}, we can use the Swift trailing closure expression syntax; Swift provides shorthand argument names, removing the need for the explicit term and definition arguments. Refactor the \texttt{map} call, using a trailing closure expression and shorthand argument names.
+\begin{lstlisting}
+cards = cardData.map { Flashcard(term: $0, definition: $1) }
+\end{lstlisting}
+\item Because the initializer no longer appends \texttt{Flashcard} objects to the mutable cards array property, the property can now be constant. Modify the \texttt{cards} property declaration to a constant, without a default value. The \texttt{cards} property declaration no longer instantiates an empty \texttt{[Flashcard]} array, since the initializer uses \texttt{map} to assign the property its \texttt{[Flashcard]} value.
+\end{itemize}
+
+\section*{Part 4}
+
+\begin{itemize}
+\item Using Interface Builder and the Document Outline, select the Term Controller and use the Identity Inspector to reveal the binding to the custom ViewController class. Each individual view controller in the storyboard can be associated with a specific class within the project.
+\item We have a naming inconsistency of Term Controller in the storyboard, and the \texttt{ViewController} class name. Using the Project Navigator, rename \texttt{ViewController.swift} to \texttt{TermController.swift}, and update the class name to \texttt{TermController}.
+\item In Interface Builder, select the Term Controller and use the Identity Inspector to change the Custom Class to \texttt{TermController}.
+\item Add a Deck property to the TermController class, we a default \texttt{Deck} object.
+\item The \texttt{TermController} \texttt{viewDidLoad} method will draw a random \texttt{Flashcard} from the deck, and use that \texttt{Flashcard} term property to update the text label.
+\item Add a naive randomCard method to the \texttt{Deck} class.
+\begin{lstlisting}
+func randomCard() -> Flashcard {
+	let randomIndex = Int(arc4random_uniform(UInt32(cards.count)))
+	return cards[randomIndex]
+}
+\end{lstlisting}
+\item The \texttt{randomCard} method should not return a \texttt{Flashcard} object when the deck is empty, and \texttt{cards.count} is 0. Improve the \texttt{randomCard} method with an optional return type.
+\begin{lstlisting}
+func randomCard() -> Flashcard? {
+	if cards.isEmpty {
+		return nil
+	} else {
+		let randomIndex = Int(arc4random_uniform(UInt32(cards.count)))
+		return cards[randomIndex]
+	}
+}
+\end{lstlisting}
+\item The \texttt{randomCard} method has no parameters, only does the necessary work to return a value, and "feels" like a property of a \texttt{Deck}. Replace the \texttt{randomCard} method with a computed property.
+\begin{lstlisting}
+var randomCard: Flashcard? {
+	if cards.isEmpty {
+		return nil
+	} else {
+		return cards[Int(arc4random_uniform(UInt32(cards.count)))]
+	}
+}
+\end{lstlisting}
+\item In \texttt{TermController}, update the implementation of \texttt{viewDidLoad} to draw a \texttt{randomCard}, and use that card to update the text label.
+\begin{lstlisting}
+override func viewDidLoad() {
+	super.viewDidLoad()
+	if let flashcard = deck.randomCard {
+		termLabel.text = flashcard.term
+	}
+}
+\end{lstlisting}
+\item Run the app and observe the random card term on the screen. Tap the Definition button, observe how the default text view text appears, and navigate back to the first view controller.
+\end{itemize}
+
+\section*{Part 5}
+
+\begin{itemize}
+\item Add a new Swift class to the project called \texttt{DefinitionController} extending \texttt{UIViewController}.
+\item Using Interface Builder, select the Definition Controller and use the Identity Inspector to set the Class to \texttt{DefinitionController}.
+\item Run the app, tap the Definition button, and observe how the default text view text still appears.
+\item \texttt{TermController} obtains a \texttt{Flashcard} object. We need to provide the same \texttt{Flashcard} object to the \texttt{DefinitionController}, so that it can display the definition of the particular \texttt{Flashcard}.
+\item Add a \texttt{Flashcard?} property to the \texttt{DefinitionController} class. The property is optional, because the \texttt{DefinitionController} initializer will not initialize the property; the property is a variable, because the controller will present definitions of different \texttt{Flashcard} objects.
+\item Using Interface Builder, select the Definition Controller and create a connection from the text view to an outlet in the \texttt{DefinitionController} class.
+\item Implement a \texttt{viewDidLoad} method in the \texttt{DefinitionController}, to set the definition text using the \texttt{Flashcard} property.
+\item In the documentation, examine the \texttt{UIViewController} method \texttt{prepareForSegue:sender:}. Before a segue is performed, the \texttt{prepareForSegue:sender:} method is called, and receives a reference to both a \texttt{UIStoryboardSegue} object and a reference to the interface control that triggered the segue. \texttt{UIStoryboardSegue} has two properties \texttt{sourceViewController} and \texttt{destinationViewController} that will be useful.
+\item Add a \texttt{Flashcard?} property to the \texttt{TermController} class.
+\item Update the \texttt{TermController} \texttt{viewDidLoad} implementation, to assign a value to the \texttt{Flashcard} property and use it after that.
+\item Implement \texttt{prepareForSegue:sender:} in the \texttt{TermController} class.
+\begin{lstlisting}
+override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+	if let definitionController =
+		segue.destinationViewController as? DefinitionController {
+		definitionController.flashcard = flashcard
+	}
+}
+\end{lstlisting}
+\item An object is retrieved from the segue, is casted to a \texttt{DefinitionController} using the \texttt{as?} type cast operator, and the \texttt{TermController} uses its \texttt{flashcard} property to assign a \texttt{Flashcard} object to the \texttt{DefinitionController} \texttt{flashcard} property.
+\item Run the app, tap the Definition button, and observe the correct definition appear.
+\end{itemize}
+
+\section*{Part 6}
+
+\begin{itemize}
+\item We want a new random term to be displayed every time the \texttt{TermController} is presented.
+\item Explore the \texttt{UIViewController} documentation.
+\item Find the best method to implement to make sure the \texttt{TermController} is updated each time it appears. Implement it.
+\item Run the app, tap the Definition button, observe the corresponding definition, tap the Term (back) button, and observe a new (likely, due to the random Flashcard selection) term appear. Move back and forth between term and definition to observe the changes.
+\end{itemize}
+
+
+
+
+
+
+
+\end{document}
