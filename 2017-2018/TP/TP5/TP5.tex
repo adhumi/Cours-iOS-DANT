@@ -1,0 +1,132 @@
+\documentclass[a4paper,11pt]{scrartcl}
+\input{../common_definitions.tex}
+
+\begin{document}
+
+\newcommand{\mytitle}{TP 5 - MapKit}
+\title{\mytitle}
+\author{Adrien Humilière}
+\date{05/04/2018}
+
+\maketitle
+
+\section*{Part 1}
+
+\begin{itemize}
+\item Using Interface Builder, add a \texttt{Button} to the view labeled \textit{Open Maps App with URL}.
+\item Add constraints to center the button horizontally, and to set its top vertical space relative to the main view.
+\item Create a connection from the button to a controller action called \texttt{openMapsAppWithURL:}.
+\begin{lstlisting}
+@IBAction func openMapsAppWithURL(sender: UIButton) {
+	if let url = URL(string: "http://maps.apple.com/?q=Yosemite") {
+		UIApplication.shared.open(url, options: [:], completionHandler: nil)
+	}
+}
+\end{lstlisting}
+\item Explain the creation of an \texttt{URL} from a string, representing a URL or "the location of a resource", a map that one wishes to open, which iOS handles by opening the Maps app.
+\item Explain how the \texttt{q=} query string parameter represents a "query", and is parsed by the Maps app to search for a location on the map.
+\item Using the documentation, explore the \texttt{UIApplication} class reference and the \texttt{openURL:} method.
+\item Explain how the call to \texttt{UIApplication.shared} returns a reference to the app instance itself.
+\item Run the app, tap the button, and observe how the Maps app enters the foreground.
+\end{itemize}
+
+\section*{Part 2}
+
+\begin{itemize}
+\item Search for Map Kit Framework in the documentation and explore the resulting documentation.
+\item Map Kit provides an easy way to embed maps in your own application.
+\item Using Interface Builder, delete the button from the interface.
+\item Add a Map View to interface. Adjust its top edge to leave room for the iOS status bar, and place the constraints to completely fill the screen, for all device sizes.
+\item In the \texttt{ViewController} class, comment the \texttt{openMapsAppWithURL:} method.
+\item Run the app and observe the crash: \textit{Could not instantiate class named MKMapView}. We need to link the Map Kit framework in the project.
+\item Using the Project Navigator, select the project and add \textbf{MapKit.framework} to the project \textit{Linked Frameworks and Libraries}, and observe the framework appear in the Project Navigator.
+\item Run the app and observe the map appear. Tap and drag the map to scroll, and alt-click with the mouse to zoom in and out of the map.
+\end{itemize}
+
+\section*{Part 3}
+
+\begin{itemize}
+\item Using Interface builder, select the Map View and open the Attributes Inspector.
+\item Change the \textbf{Type} to \textbf{Hybrid} and ensure that \textbf{Shows User Location} is checked.
+\item Run the app and observe how the map adds satellite imagery to the application.
+\item Observe the console warning \textit{Trying to start MapKit location updates… must call requestWhenInUseAuthorization … first}. iOS apps must request user authorization to use location information with the Core Location framework.
+\item Import the Core Location framework above the \texttt{AppDelegate} class definition.
+\item Explore Core Location Framework documentation.
+\item In the \texttt{AppDelegate} class, declare a \texttt{CLLocationManager} property with a default value.
+\begin{lstlisting}
+let locationManager = CLLocationManager()
+\end{lstlisting}
+\item Explore the \texttt{CLLocationManager} class documentation.
+\item In the \texttt{AppDelegate} class, modify \texttt{application:didFinishLaunchingWithOptions:} to request permission to use iOS location services.
+\item \texttt{application:didFinishLaunchingWithOptions:} will prompt the user for permission to use location services, but will require additional app configuration. Using the Project Navigator, open \texttt{Info.plist} and add the Key \texttt{NSLocationWhenInUseUsageDescription} and Value \textit{Required for displaying your location on the map}.
+\item Run the app and tap the Allow button. Observe the position of the location beacon, scrolling and zooming the map by alt-clicking with the mouse if necessary.
+\item The iOS Simulator chooses Cupertino, CA as the default location.
+\item Using the Simulator menu item \textit{Debug > Location > Custom Location…}, enter a latitude and longitude, and observe the change in the position of the location beacon.
+\end{itemize}
+
+\section*{Part 4}
+
+\begin{itemize}
+\item By default, a map view does not automatically zoom the map to the current location.
+\item Explore the \texttt{MKMapView} class documentation, the \texttt{setUserTrackingMode:animated:} method, and the \texttt{MKUserTrackingMode} enumeration.
+\item Import Map Kit in \texttt{ViewController}.
+\item Using Interface Builder, drag a connection from the map view to create an outlet in the \texttt{ViewController} class.
+\item Add a call to \texttt{setUserTrackingMode:animated:} in \texttt{viewDidLoad}.
+\item Run the app, and observe the map "zoomed in" on the location.
+\item We might wish to zoom the map at a scale that is different from the default zoom level provided by the map view.
+\item Explore the \texttt{MKMapViewDelegate} protocol documentation, and the \texttt{mapView:didUpdateUserLocation:} method.
+\item Using Interface Builder, control-drag a connection from the Map View to \texttt{ViewController} in the Document Outline, specifying \texttt{ViewController} as the Map View delegate.
+\item Declare the adoption of the \texttt{MKMapViewDelegate} protocol for the \texttt{ViewController} class.
+\item Add an implementation of \texttt{mapView:didUpdateUserLocation:} to \texttt{ViewController}.
+\begin{lstlisting}
+func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
+	let center = CLLocationCoordinate2D(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude)
+	let width = 1000.0 // meters
+	let height = 1000.0
+	let region = MKCoordinateRegionMakeWithDistance(center, width, height)
+	mapView.setRegion(region, animated: true)
+}
+\end{lstlisting}
+\item The map view calls the \texttt{mapView:didUpdateUserLocation:} method in its delegate when the user location is updated.
+\item Explore the domentation for \texttt{CLLocationCoordinate2D} structure, \texttt{MKCoordinateRegion} structure, and the \texttt{MKCoordinateRegionMakeWithDistance} function.
+\item \texttt{MKCoordinateRegion} consists of a center, width and height; and the \texttt{MKMapView setRegion:animated:} method receives a "square region" for configuring the map display.
+\item Run the app and observe the map "zoomed in" on the location.
+\end{itemize}
+
+\section*{Part 5}
+
+\begin{itemize}
+\item Using Interface Builder, add a Toolbar to the bottom of the view. Add autolayout constraints for the toolbar leading, trailing, and bottom space. Adjust the bottom edge of the map view to match the top edge of the toolbar.
+\item Click on the default Item button and use the Attributes Inspector to change the \textbf{Identifier} attribute to \textbf{Add}. Observe how the button appearance changes.
+\item Run the app.
+\item Using Interface Builder, control-drag from the Add button to the \texttt{ViewController} class definition to create an action called \texttt{dropPin:}.
+\item Map Kit uses the concept of an \texttt{MKAnnotation} to represent markers on a map. Explore the documentation for \texttt{MKAnnotation} protocol reference. There is no \texttt{MKAnnotation} class, only a protocol. We will need to create a class for an annotation, adopting the \texttt{MKAnnotation} protocol.
+\item Add a new Pin class to the project.
+\item Import \texttt{MapKit} and update the class definition to extend \texttt{Object} and adopt the \texttt{MKAnnotation} protocol.
+\item Using the documentation, review the requirements of the \texttt{MKAnnotation} protocol. It requires having a \texttt{CLLocationCoordinate2D} property.
+\item Add a \texttt{CLLocationCoordinate2D} property and an initializer to the \texttt{Pin} class.
+\item Update the implementation of the dropPin: method in the controller class: create a new \texttt{Pin}, located at the center of the map.
+\item Run the app, observe the current location beacon, tap the Add button, and observe the annotation appear.
+\end{itemize}
+
+\section*{Part 6}
+
+\begin{itemize}
+\item Helped by the documentation, use an image instead of the default pin view for annotations.
+\item Display the coordinates in a tooltip when tapping the pin.
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
