@@ -1,0 +1,167 @@
+\documentclass[a4paper,11pt]{scrartcl}
+\input{../common_definitions.tex}
+
+\begin{document}
+
+\newcommand{\mytitle}{\textsf{\textbf{TP 1 - Swift}}}
+\title{\mytitle}
+\author{Adrien Humilière}
+\date{15/02/2019}
+
+\maketitle
+
+Download and unarchive \texttt{SpaceAdventure.zip}, base project for this lab.
+
+\section*{Part 1}
+
+\begin{itemize}
+\item Using the Project Navigator (\keys{\cmd+1}), open main.swift.
+\item Swift programs generally contain a main.swift file, which contains code for the starting point, or "main entry point," of a Swift program.
+\item Run the program (\keys{\cmd+R}), and observe the console (\keys{\shift+\cmd+C}) to see the program's output.
+\item Declare two variables.
+\begin{lstlisting}
+var numberOfPlanets: Int = 8
+var diameterOfEarth: Float = 24859.82 // In miles, from pole to pole
+\end{lstlisting}
+\item Swift single-line comments begin with \texttt{//}.
+\item Remove the printing of \texttt{Hello World!} and add some of your own \texttt{print} calls below the variable declarations.
+\begin{lstlisting}
+print("Welcome to our solar system!")
+print("There are \(numberOfPlanets) planets to explore.")
+print("You are currently on Earth, which has a circumference of \(diameterOfEarth) miles.")
+\end{lstlisting}
+\item Run the program, and observe the console output.
+\item Remove the type annotations from the two variable declarations.
+\begin{lstlisting}
+var numberOfPlanets = 8
+var diameterOfEarth = 24859.82 // In miles, from pole to pole
+\end{lstlisting}
+\item Run the program, and observe how the program works the same.
+\item The values of \texttt{numberOfPlanets} and \texttt{diameterOfEarth} do not change while the program is running.
+\item Change the variable declarations to constant declarations.
+\item Run the program, and observe how the program works the same.
+\item You should always start with \texttt{let}, and fallback to \texttt{var} if needed.
+\end{itemize}
+
+\section*{Part 2}
+
+\begin{itemize}
+\item We need to ask the user their name, to capture what they type, and to print it back on the console.
+\item Implement an idiomatic approach to capturing console input from the user with a provided utility function, \texttt{getln}.
+\begin{lstlisting}
+print("What is your name?")
+let name = getln()
+print("Nice to meet you, \(name). My name is Eliza, I'm an old friend of Siri.")
+\end{lstlisting}
+\item Unlike \texttt{print}, which is part of the Swift Standard Library, the \texttt{getln} function is a "helper" function provided as a convenience with this particular Xcode project.
+\item Using the Project Navigator, locate and select the HelperFunctions.swift file.
+\item Xcode will compile all of the Swift source files within the Xcode project before running the application.
+\item \texttt{getln} function retrieves keyboard input from the console, and returns what the user has typed as a \texttt{String} value.
+\item Run the program, interact with the console, and observe the output.
+\item We could suggest an adventure, and ask the traveler if he or she would like the program to choose a random planet to visit.
+\begin{lstlisting}
+print("Let's go on an adventure!")
+print("Shall I randomly choose a planet for you to visit? (Y or N)")
+let decision = getln()
+\end{lstlisting}
+\item We need the program to make a decision on what to do, based on what the traveler types, stored in the constant \texttt{decision}.
+\item Implement a decision using an \texttt{if} statement and an \texttt{else} clause.
+\begin{lstlisting}
+if decision == "Y" {
+	print("Ok! Traveling to...")
+	// TODO: travel to random planet
+} else {
+	print("Ok, name the planet you would like to visit...")
+	// TODO: let the user select a planet to visit
+}
+\end{lstlisting}
+\item Run the program, interact with the console, and enter \texttt{Y} or \texttt{N} to observe the respective output.
+\end{itemize}
+
+\section*{Part 3}
+
+\begin{itemize}
+\item We need to ask the traveler if he wants to visit a random planet, and to prompt for another answer "as long as the traveler does not answer \texttt{Y} or \texttt{N}."
+\item Modify the existing user input capturing and decision making to leverage a while loop to carry out the repetitive task of waiting for the user to type \texttt{Y} or \texttt{N}.
+\item Run the program, interact with the console, try some arbitrary input, and observe that the program continues to prompt until \texttt{Y} or \texttt{N} is entered.
+\end{itemize}
+
+\section*{Part 4}
+
+\begin{itemize}
+\item We need to model what happens during the space adventure, such as greeting the travelers, asking them what planets they want to travel to, and then traveling to the planets.
+\item Add a new Swift file (\keys{\cmd+N}) called SpaceAdventure.swift. Be sure that the SpaceAdventure group is selected, and that the SpaceAdventure target is checked.
+\item Explain the convention of using an individual file to contain a single class definition, and how the file name (SpaceAdventure.swift) alludes to the name of the class it contains.
+\item At a high level of thinking, the code in main.swift should has just two jobs: to create a \texttt{SpaceAdventure} object, and to start the adventure.
+\item Above the existing code within main.swift, instantiate a \texttt{SpaceAdventure} object.
+\begin{lstlisting}
+import Foundation
+
+let adventure = SpaceAdventure()
+
+let numberOfPlanets = 8
+...
+\end{lstlisting}
+\item Observe the errors in the Xcode editor.
+\item We now have to write the \texttt{SpaceAdventure} class definition. Using the Project Navigator, select SpaceAdventure.swift and implement a basic class definition.
+\item Return to main.swift, and observe that the error notice disappears.
+\item We might call a method upon a \texttt{SpaceAdventure} object, telling it to \texttt{start}. Add a method call using the \texttt{SpaceAdventure} object.
+\begin{lstlisting}
+adventure.start()
+\end{lstlisting}
+\item Observe the error notice in the Xcode editor.
+\end{itemize}
+
+\section*{Part 5}
+
+\begin{itemize}
+\item \texttt{SpaceAdventure} object does not know how to handle the \texttt{start} method call.
+\item Add an empty implementation of the \texttt{start} method to the \texttt{SpaceAdventure} class.
+\item Return to main.swift, and observe how the Xcode error notices disappear.
+\item Cut and paste the existing code from main.swift into the body of the \texttt{SpaceAdventure start} method implementation.
+\item Run the program, and interact with the console to demonstrate that the existing functionality remains intact.
+\item main.swift now only creates a \texttt{SpaceAdventure} object, and tells the \texttt{SpaceAdventure} object to \texttt{start}.
+\end{itemize}
+
+\section*{Part 6}
+
+\begin{itemize}
+\item The \texttt{start} method seems to do three things: print an introduction, greet the user, and determine which planet to travel to.
+\item Extract the first few lines of \texttt{start} into a new private method called \texttt{displayIntroduction}. Replace the extracted code with a method call at the beginning of \texttt{start}.\\
+The \texttt{displayIntroduction} will only be called by the \texttt{start} method, and is marked \texttt{private} to indicate that only code within the same file will be able to call \texttt{displayIntroduction}.
+\item The \texttt{start} method uses a pair of print and \texttt{getln} methods twice, to prompt for and capture user input. Encapsulate the work of prompting for and capturing user input into a private method called \texttt{responseToPrompt}.
+\item Replace the relevant lines of code in \texttt{start} to use the new \texttt{responseToPrompt} method.
+\item Extract the greeting-related code in \texttt{start} into a new method called \texttt{greetAdventurer}.
+\item Extract the remaining code in \texttt{start} into a new method called \texttt{determineDestination}. Update the \texttt{start} method to call the new \texttt{greetAdventurer} and \texttt{determineDestination} methods.
+\item Run the program and confirm that the functionality remains unchanged.
+\end{itemize}
+
+\section*{Part 7}
+
+\begin{itemize}
+\item We need to model a collection of planets, using a \texttt{PlanetarySystem} class.
+\item Add a new Swift file called PlanetarySystem.swift to the project.
+\item Using the Project Navigator, select PlanetarySystem.swift and implement a basic \texttt{PlanetarySystem} class definition.
+\item Add a property declaration to the \texttt{PlanetarySystem} class to represent the name of the planetary system. Swift requires that all constant properties be assigned values during instantiation, within the implementation of an initializer.
+\item Add a parameterized initializer to the \texttt{PlanetarySystem} class.
+\item SpaceAdventure should consist of a \texttt{PlanetarySystem} to travel within, we need to add a \texttt{PlanetarySystem} property to the \texttt{SpaceAdventure} class.
+\item Add the new \texttt{PlanetarySystem} property to the \texttt{SpaceAdventure} class.
+\begin{lstlisting}
+class SpaceAdventure {
+	let planetarySystem = PlanetarySystem(name: "Solar System")
+...
+\end{lstlisting}
+\item Update the implementation of displayIntroduction, removing some previous demonstration code, and using the \texttt{PlanetarySystem} name to display the introductory message.
+\item Discuss how name is a property of a \texttt{PlanetarySystem} object, and how \texttt{planetarySystem} is a property of a \texttt{SpaceAdventure} object.
+\item Run the program, and observe how the console output reflects the name of the planetary system.
+\end{itemize}
+
+\section*{Part 8}
+
+\begin{itemize}
+\item Configure the Planetary System with a list of planets (in the initializer). Use this list of planets for the random destination.
+\item To go further, make it possible for the user to choose his Planetary System before choosing his destination planet.
+\end{itemize}
+
+
+\end{document}
