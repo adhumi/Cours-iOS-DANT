@@ -1,0 +1,46 @@
+\documentclass[a4paper,11pt]{scrartcl}
+\input{../TP/common_definitions.tex}
+\usepackage{hyperref}
+
+\begin{document}
+
+\newcommand{\mytitle}{\textsf{\textbf{Projet – Première partie}}}
+\title{\mytitle}
+\author{Adrien Humilière}
+\date{DANT 2018/2019}
+
+\maketitle
+
+Les deux parties du projet vous permettront de développer une application météo simple. Dans la première partie, vous utiliserez Swift pour interroger une API et en interpréter les données. Dans la deuxième partie, vous utiliserez ce code pour construire une vraie application.\\
+
+Le projet s'effectuera par groupe de deux étudiants. Les deux parties seront rendues sous la forme de dépôts git, le 5 avril pour la première, le 6 juin pour la deuxième. Le 6 juin, vous devrez présenter lors d'une soutenance une application fonctionnelle.
+
+\section*{L'API utilisée}
+
+Votre application utilisera l'API \href{https://openweathermap.org/api}{OpenWeatherMap}. Elle est gratuite en dessous de 60 appels par minute. Vous aurez besoin de créer un compte pour enregistrer votre application et obtenir une clé d'API. 
+
+\section*{Le projet}
+
+L'application finale permettra de chercher la météo d'une ville et d'ajouter cette ville en favori pour la retrouver facilement. Pour chaque ville, l'application devra afficher le temps en cours et les prévisions sur cinq jours.\\
+
+Vous utiliserez les ressources suivantes :
+\begin{itemize}
+\item Il est possible de télécharger un JSON avec la liste complète des villes et leurs identifiants associés à cette adresse : http://bulk.openweathermap.org/sample/. Votre projet pourra l'utiliser pour autocompléter et trouver facilement les villes disponibles.
+\item L'endpoint "Current weather data" permet de récupérer les conditions météorologiques actuelles pour une ville ou une liste de ville. Plus d'informations sur la documentation : https://openweathermap.org/current.
+\item L'endpoint "5 day weather forecast" permet de récupérer les prévision météorologiques pour les 5 prochains jours. Plus d'informations sur la documentation : https://openweathermap.org/forecast5
+\end{itemize}
+
+\section*{Les attentes pour la première partie}
+
+Cette première partie du projet permet de préparer le terrain pour la suite. Elle correspond à 50\% de la note finale.\\
+
+Le rendu sera constitué d'une série de fonction permettant d'effectuer les opérations suivantes :
+\begin{itemize}
+\item Recherche d'une ville à partir de son nom
+\item Récupération des conditions météorologiques actuelles pour une ville ou une liste de villes
+\item Récupération des prévisions météorologiques à 5 jours pour une ville
+\end{itemize}
+
+Vous avez toute liberté pour définir le modèle de donnée, les types et fonctions que vous utiliserez. Définissez les bons types pour que votre application puisse exploiter l'API en toute simplicité. Soyez exhaustifs mais n'en faites pas trop. Une application simple mais qui fonctionne parfaitement sera mieux notée qu'une application complète fonctionnant à moitié.
+
+\end{document}
