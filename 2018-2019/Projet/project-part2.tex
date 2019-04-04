@@ -1,0 +1,44 @@
+\documentclass[a4paper,11pt]{scrartcl}
+\input{../TP/common_definitions.tex}
+\usepackage{hyperref}
+
+\begin{document}
+
+\newcommand{\mytitle}{\textsf{\textbf{Projet – Deuxième partie}}}
+\title{\mytitle}
+\author{Adrien Humilière}
+\date{DANT 2018/2019}
+
+\maketitle
+
+Les deux parties du projet vous permettront de développer une application météo simple. Dans la première partie, vous utiliserez Swift pour interroger une API et en interpréter les données. Dans la deuxième partie, vous utiliserez ce code pour construire une vraie application.\\
+
+Le projet s'effectuera par groupe de deux étudiants. Les deux parties seront rendues sous la forme de dépôts git, le 5 avril pour la première, le 6 juin pour la deuxième. Le 6 juin, vous devrez présenter lors d'une soutenance une application fonctionnelle.
+
+\section*{L'API utilisée}
+
+Votre application utilisera l'API \href{https://openweathermap.org/api}{OpenWeatherMap}. Elle est gratuite en dessous de 60 appels par minute. Vous aurez besoin de créer un compte pour enregistrer votre application et obtenir une clé d'API. 
+
+\section*{Le projet}
+
+L'application que vous devez développer dans cette deuxième partie permettra de chercher la météo d'une ville et d'ajouter cette ville en favori pour la retrouver facilement. Pour chaque ville, l'application devra afficher le temps en cours et les prévisions sur cinq jours.
+
+\section*{Les attentes pour la seconde partie}
+
+À l'issue de cette deuxième partie, l'application devra être 100\% fonctionnelle. Le travail fourni correspondra à 50\% de la note finale.\\
+
+Le rendu sera un dépôt git contenant un projet Xcode. Il permettra de lancer une application qui affichera au minimum :
+\begin{itemize}
+\item Un formulaire de recherche pour trouver une ville à partir de son nom
+\item La possibilité d'ajouter une ville dans ses favoris
+\item Une liste des villes mises en favoris, avec les conditions météorologiques actuelles
+\item Les prévisions météorologiques d'une ville, sur un écran spécifique
+\end{itemize}
+
+Vous avez toute liberté pour choisir votre design, mais gardez en mémoire que le web des années 90 a disparu depuis 20 ans. Concevez une application que vous auriez envie d'utiliser.
+
+\section*{La soutenance}
+
+Chaque binôme disposera de 20 minutes. 10 minutes de présentation (avec support) et 10 minutes de questions/réponses. Soignez votre présentation. L'application devra être installée et fonctionner sur un des iPhone ou iPad disponibles auprès de Patricia Lavanchy
+
+\end{document}
