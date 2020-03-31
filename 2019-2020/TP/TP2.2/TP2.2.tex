@@ -1,0 +1,110 @@
+\documentclass[a4paper,11pt]{scrartcl}
+\input{../common_definitions.tex}
+\usepackage{hyperref}
+
+\begin{document}
+
+\newcommand{\mytitle}{\textsf{\textbf{TP 2 - Client–Server communication}}}
+\title{\mytitle}
+\author{Adrien Humilière}
+\date{01/04/2019}
+
+\maketitle
+
+\setcounter{part}{1}
+\part{Parsing JSON}
+
+The purpose of this lab is to get familiar with decoding JSON data into your own custom model objects. You'll start with the iTunes Search playground you created in the first part. Your task with this lab will be to decode the data you retrieved into a custom model object.
+
+With the current situation, we will use \href{https://repl.it/languages/swift}{\underline{repl.it}} to code this lab. Create an account on the platform to easily save your work, as we will probably keep using it in the following labs. Please use the \textbf{Share} button to send me the final project's URL. Also, link it if you have any question for me.\\
+
+We will start with the code written in the first part of TP 2.
+
+\section*{Step 1: Create Your Model Object}
+
+\begin{itemize}
+\item Look through the data that you printed to the console in the previous lab. Identify what properties your object will have. Some of the properties might include title, artist, kind, description, and the URL for the artwork.
+\item Once you've identified the properties that will make up your object, create a \texttt{StoreItem} structure with those properties.
+\item You'll be making these \texttt{StoreItem} objects from the JSON data, so you'll add custom keys as an enumeration on your object.
+\item Now create your own implementation of \texttt{init(from:)} that takes a \texttt{Decoder} as a parameter. The implementation of this should get the \texttt{KeyedCodingContainer} from \texttt{decoder} and then use it to decode the values for each key. The values should then be assigned to their corresponding properties.
+\item You might have noticed that an item can have different types of \texttt{descriptions}. Some items have a description key, while others have a \texttt{longDescription} key. Your model object makes no distinction between the two. If the API sends down a value with the \texttt{description} key, that is what you should assign to your model. However, if it sends down a value with the \texttt{longDescription} key and nothing with the \texttt{description} key, you should use that instead. If neither value exists, just assign \texttt{description} to an empty string. 
+\item To do this, you will need a \texttt{CodingKey} for each. But the \texttt{Codable} protocol doesn't allow you to add cases to \texttt{CodingKeys} that don't match one of your properties, i.e. \texttt{longDescription}. To get around this, create a second nested enumeration called \texttt{AdditionalKeys} that conforms to \texttt{CodingKey} and has a case for \texttt{longDescription}. Then, in \texttt{init(from:)} you can use \texttt{try?} when decoding the value for \texttt{description}, and if it fails you can decode the value associated with \texttt{longDescription} and assign it to the description property.
+\item There is one last hurdle to jump over. Each \texttt{KeyedCodingContainer} only contains the key/value pairs associated with the cases in the \texttt{CodingKey} enumeration used, so to decode the value for \texttt{longDescription}, you need to get a different \texttt{KeyedCodingContainer} from \texttt{decoder} using \texttt{AdditionalKeys}. When all of this is done, your \texttt{AdditionalKeys} enumeration and \texttt{init(from:)} initializer should look similar to the following:
+\begin{lstlisting}
+enum AdditionalKeys: String, CodingKey {
+    case longDescription
+}
+
+init(from decoder: Decoder) throws {
+    let values = try decoder.container(keyedBy: CodingKeys.self)
+    name = try values.decode(String.self, forKey:
+       CodingKeys.name)
+    artist = try values.decode(String.self, forKey:
+       CodingKeys.artist)
+    kind = try values.decode(String.self, forKey:
+       CodingKeys.kind)
+    artworkURL = try values.decode(URL.self, forKey:
+       CodingKeys.artworkURL)
+
+    if let description = try? values.decode(String.self, forKey:
+       CodingKeys.description) {
+        self.description = description
+    } else {
+        let additionalValues = try decoder.container(keyedBy:
+           AdditionalKeys.self)
+        description = (try? additionalValues.decode(String.self,
+           forKey: AdditionalKeys.longDescription)) ?? ""
+    }
+}
+\end{lstlisting}
+\end{itemize}
+
+\section*{Step 2: Create a Function to Fetch Items}
+Now that you have a \texttt{StoreItem} object, you're ready to fetch the data that you'll decode into your model type.
+
+\begin{itemize}
+\item Create a new \texttt{fetchItems} function that takes a query dictionary and a completion handler. The completion handler should accept an optional array of store items (\texttt{[StoreItem]}). The completion handler should be marked as \texttt{@escaping}.
+\begin{lstlisting}
+func fetchItems(matching query: [String: String], completion:
+@escaping ([StoreItem]?) -> Void) { }
+\end{lstlisting}
+\end{itemize}
+ 
+The function should create a URL with the queries, create a new request, and resume the request. When the request is complete, the function should create a \texttt{JSONDecoder}, unwrap the data, and decode it into an array of \texttt{StoreItem} objects.
+
+The response from the iTunes Search API is structured a little differently from the NASA APOD API. The first difference is that the results are under the \texttt{"results"} key, rather than at the top level. The second difference is that the results come back as an array, not as an individual object.
+
+To accommodate this, you'll need to create an intermediary object that conforms to \texttt{Codable} that uses \texttt{results} as a key and has a value of type \texttt{[StoreItem]}. The easiest way to do this is to create a simple struct called \texttt{StoreItems} that has only a property results of type \texttt{[StoreItem]}. Since \texttt{StoreItem} conforms to \texttt{Codable} and the property name \texttt{results} is the same as the key in the data, you simply need to put \texttt{Codable} in your \texttt{StoreItems} declaration and the compiler will auto-generate the rest of what is needed at compile-time for a \texttt{Decoder} object to be able to decode data to a \texttt{StoreItems} object. This will look as follows:
+\begin{lstlisting}
+struct StoreItems: Codable {
+    let results: [StoreItem]
+}
+\end{lstlisting}
+
+Follow these steps to implement the \texttt{fetchItems} function:
+\begin{itemize}
+\item If you haven't already, create a \texttt{StoreItems} struct as shown previously.
+\item Move your \texttt{baseURL} variable inside the function.
+\item Instantiate a new \texttt{URL} with the queries that were passed in using the \texttt{withQueries} function. You'll want to guard against any URLs that can't be constructed with the supplied queries.
+\item Create a new data task on the shared URL session. (You'll implement the completion handler in the next step.)
+\item Resume the task.
+\end{itemize}
+
+\section*{Step 3: Decode the JSON}
+
+\begin{itemize}
+\item Inside the task's closure, create a new \texttt{JSONDecoder}.
+\item Check to see if you've received valid data back from the API. If you have, try and decode it into a \texttt{StoreItems} object.
+\item If you successfully unwrapped both the data and the \texttt{StoreItems} object, pass the \texttt{results} property on \texttt{StoreItems} through the completion handler. Remember that the \texttt{results} property on \texttt{StoreItems} has the array of each individual \texttt{StoreItem} object.
+\item If the data can't be unwrapped or if the JSON fails to decode properly, print an explanation to the console (something like the response was invalid or could not be decoded), and call the completion handler with a \texttt{nil} parameter.
+\end{itemize}
+
+\section*{Step 4: Call Your Function}
+
+With the \texttt{StoreItem} struct, the intermediary \texttt{StoreItems} struct, the \texttt{fetchItems} function, and your search query, you're ready to call your function and create your model objects.
+\begin{itemize}
+\item Call the \texttt{fetchItems} function and pass in your query. Print the decoded \texttt{[StoreItem]} array in the completion handler.
+\end{itemize}
+You did it! You've fetched data and decoded it into your own custom model object. You'll use code just like this for fetching data to display in your apps.
+
+\end{document}
